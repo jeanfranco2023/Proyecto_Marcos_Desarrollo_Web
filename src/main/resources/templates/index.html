@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    <div class="container-fluid vh-100 d-flex justify-content-center align-items-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow">
+                <div class="card-body p-4">
+                    <h2 class="text-center mb-4">Login</h2>
+                    <form th:action="@{/users/logeo}" th:object="${login}" method="post">
+                        <div class="mb-4">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" th:field="*{email}" class="form-control border-0 border-bottom rounded-0" id="email"
+                                placeholder="correo@ejemplo.com">
+                        </div>
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-end">
+                                <div class="w-75">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" th:field="*{password}" class="form-control border-0 border-bottom rounded-0"
+                                        id="password" placeholder="········">
+                                </div>
+                                <a href="#" class="text-decoration-none">¿Te olvidaste?</a>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold mt-4">Ingresar</button>
+
+                        <div class="text-center mt-3">
+                            <span class="text-muted">No tienes cuenta? </span>
+                            <a href="#" class="text-decoration-none fw-bold" data-bs-toggle="modal"
+                                data-bs-target="#registroModal">Crea ahora</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fs-4 fw-bold" id="registroModalLabel">Registro de Usuarios</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/users/registro}" th:object="${usuario}" method="POST">
+                        <input type="hidden" th:field="*{idUsuario}"/>
+                    
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <i class="bi bi-person-fill me-2"></i>
+                            <input type="text" th:field="*{nombreUsuario}" class="form-control border-0 border-bottom rounded-0"
+                                id="nombreCompleto" placeholder="Nombre completo">
+                        </div>
+                    
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <i class="bi bi-telephone-inbound-fill me-2"></i>
+                            <input type="number" th:field="*{numeroTelefonoUsuario}" class="form-control border-0 border-bottom rounded-0"
+                                id="NumeroTelefono" placeholder="Número de teléfono">
+                        </div>
+                    
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <i class="bi bi-envelope-fill me-2"></i>
+                            <input type="email" th:field="*{correoUsuario}" class="form-control border-0 border-bottom rounded-0"
+                                id="emailRegistro" placeholder="correo@ejemplo.com">
+                        </div>
+                    
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <i class="bi bi-lock-fill me-2"></i>
+                            <input type="password" th:field="*{contrasenaUsuario}" class="form-control border-0 border-bottom rounded-0"
+                                id="passwordRegistro" placeholder="Password">
+                        </div>
+                    
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <i class="bi bi-shield-fill me-2"></i>
+                            <input type="password" class="form-control border-0 border-bottom rounded-0"
+                                id="confirmPassword" placeholder="Confirmar Password">
+                        </div>
+                    
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold mt-3">Registrarse</button>
+                    </form>
+                    
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <span class="text-muted">¿Ya tienes cuenta? </span>
+                    <button type="button" class="btn btn-link p-0 ms-1" data-bs-dismiss="modal">Inicia sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-danger text-white border-0">
+                    <h5 class="modal-title" id="errorModalLabel">¡Error en el registro!</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center fs-5" id="errorModalMessage">
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <button type="button" class="btn btn-outline-danger px-4" data-bs-dismiss="modal">Entendido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/login.js"></script>
+</body>
+
+</html>

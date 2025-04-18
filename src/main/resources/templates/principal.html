@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/principal.css">
+    <title>SHOP.CO</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="/html/principal.html">SHOP.CO</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-3">
+                    <li class="nav-item dropdown menu-container">
+                        <a class="nav-link dropdown-toggle ms-4" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Tienda
+                        </a>
+                        <ul class="first-level-menu" aria-labelledby="navbarDropdown">
+                            <li class="first-level-item has-submenu">
+                                <a href="/html/ropa.html">Ropa</a>
+                                <div class="mega-menu">
+                                    <div class="mega-menu-container">
+                                        <div class="mega-menu-column">
+                                            <h4 class="mega-menu-title">Hombre</h4>
+                                            <div class="mega-menu-item"><a href="/ropa/hombre/tshirt">T-Shirts</a></div>
+                                            <div class="mega-menu-item"><a href="/ropa/hombre/camisas">Camisas</a></div>
+                                            <div class="mega-menu-item"><a href="/ropa/hombre/sudaderas">Sudaderas</a>
+                                            </div>
+                                            <div class="mega-menu-item"><a href="/ropa/hombre/jeans">Jeans</a></div>
+                                        </div>
+
+                                        <div class="mega-menu-column">
+                                            <h4 class="mega-menu-title">Mujer</h4>
+                                            <div class="mega-menu-item"><a href="/ropa/mujer/vestidos">Vestidos</a>
+                                            </div>
+                                            <div class="mega-menu-item"><a href="/ropa/mujer/blusas">Blusas</a></div>
+                                            <div class="mega-menu-item"><a href="/ropa/mujer/tops">Tops</a></div>
+                                            <div class="mega-menu-item"><a href="/ropa/mujer/jeans">Jeans</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="first-level-item has-submenu">
+                                <a href="/html/accesorios">Accesorios</a>
+                                <div class="mega-menu">
+                                    <div class="mega-menu-container">
+                                        <div class="mega-menu-column">
+                                            <h4 class="mega-menu-title">Hombre</h4>
+                                            <div class="mega-menu-item"><a href="/accesorios/hombre/relojes">Relojes</a>
+                                            </div>
+                                            <div class="mega-menu-item"><a href="/accesorios/hombre/gorras">Gorras</a>
+                                            </div>
+                                            <div class="mega-menu-item"><a
+                                                    href="/accesorios/hombre/cinturones">Cinturones</a></div>
+                                        </div>
+
+                                        <div class="mega-menu-column">
+                                            <h4 class="mega-menu-title">Mujer</h4>
+                                            <div class="mega-menu-item"><a href="/accesorios/mujer/bolsos">Bolsos</a>
+                                            </div>
+                                            <div class="mega-menu-item"><a href="/accesorios/mujer/joyeria">Joyeria</a>
+                                            </div>
+                                            <div class="mega-menu-item"><a
+                                                    href="/accesorios/mujer/panuelos">Pañuelos</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="first-level-item has-submenu">
+                                <a href="/html/estilos">Estilos</a>
+                                <div class="mega-menu">
+                                    <div class="mega-menu-container">
+                                        <div class="mega-menu-column">
+                                            <h4 class="mega-menu-title">Temporada</h4>
+                                            <div class="mega-menu-item"><a href="/estilos/verano">Verano</a></div>
+                                            <div class="mega-menu-item"><a href="/estilos/invierno">Invierno</a></div>
+                                        </div>
+
+                                        <div class="mega-menu-column">
+                                            <h4 class="mega-menu-title">Ocasión</h4>
+                                            <div class="mega-menu-item"><a href="/estilos/formal">Formal</a></div>
+                                            <div class="mega-menu-item"><a href="/estilos/casual">Casual</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link ms-4" href="#">En oferta</a></li>
+                    <li class="nav-item"><a class="nav-link ms-4" href="#">Marcas</a></li>
+                    <li class="nav-item"><a class="nav-link ms-4" href="#">Contacto</a></li>
+                </ul>
+
+                <form class="d-flex me-5 ms-5" style="max-width: 500px;flex: 1;">
+                    <input class="form-control rounded-pill ps-4" type="search" placeholder="Buscar producto"
+                        aria-label="Buscar">
+                </form>
+
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="#" class="text-dark me-3"><i class="bi bi-cart3" style="font-size: 3.5vh;"></i></a>
+                    <a href="#" class="text-dark ms-4"><i class="bi bi-person-circle display-6"></i></a>
+                    <div class="container d-flex flex-column">
+                        <span class="text-dark ms-2">Hola,</span>
+                        <span th:text="${usuario}" class="ms-2"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row align-items-center mt-4 mb-5">
+            <!-- Columna de texto -->
+            <div class="col-md-6">
+                <h1 class="fw-bold display-2" style="font-family: 'Play', sans-serif;">
+                    VÍSTETE COMO QUIERAS, SÉ QUIEN ERES
+                </h1>
+                <p class="lead mt-4 mb-4">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquam fermentum lectus,
+                    vitae blandit turpis semper sed. Fusce convallis consectetur.
+                </p>
+                <button class="btn btn-dark rounded-5 pe-4 ps-4 pt-2 pb-2">Comprar ahora</button>
+
+                <!-- Bloques estadísticos -->
+                <div class="d-flex mt-5 w-100 align-items-center flex-wrap">
+                    <div class="me-4 pe-4 border-end border-2">
+                        <h1 class="fw-bold fs-2">200+</h1>
+                        <p class="fw-bold">Marcas Internacionales</p>
+                    </div>
+                    <div class="me-4 pe-4 border-end border-2">
+                        <h1 class="fw-bold fs-2">2,000+</h1>
+                        <p class="fw-bold">Productos de alta calidad</p>
+                    </div>
+                    <div>
+                        <h1 class="fw-bold fs-2">30,000+</h1>
+                        <p class="fw-bold">Clientes satisfechos</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna de imagen -->
+            <div class="col-md-6 mt-4 mt-md-0">
+                <img src="/img/fondo.jpg" alt="" class="img-fluid rounded-5"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center g-4 pe-5 ps-5 pt-3 pb-3 mb-5 bg-black">
+        <div class="text-center mb-2 mt-2" style="max-width: 110px; width: 80%;">
+            <a href="#"><img src="/img/versace.jpg" alt="Versace" class="img-fluid"></a>
+        </div>
+        <div class="text-center mb-2 mt-2" style="max-width: 55px; width: 100%;">
+            <a href="#"><img src="/img/zara.jpg" alt="Zara" class="img-fluid"></a>
+        </div>
+        <div class="text-center mb-2 mt-2" style="max-width: 100px; width: 80%;">
+            <a href="#"><img src="/img/gucci.jpg" alt="Gucci" class="img-fluid"></a>
+        </div>
+        <div class="text-center mb-2 mt-2" style="max-width: 125px; width: 80%;">
+            <a href="#"> <img src="/img/prada.jpg" alt="Prada" class="img-fluid"></a>
+        </div>
+        <div class="text-center mb-2 mt-2" style="max-width: 135px; width: 80%;">
+            <a href="#"> <img src="/img/calvinklein.jpg" alt="Calvin Klein" class="img-fluid"></a>
+        </div>
+    </div>
+
+    <div class="container" style="font-family: 'Play', sans-serif;">
+        <div class="text-center mb-5">
+            <h1 class="fs-1 fw-bold">¡Descubre lo nuevo!</h1>
+        </div>
+        <div class="container mb-5 pb-5 border border-3 border-top-0 border-start-0 border-end-0">
+            <div class="row justify-content-center g-4">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 justify-content-center text-center fw-bold">
+                    <img src="/img/T-shirt_Vintage.jpg" alt=""
+                        class=" p-1 img-fluid border border-3 border-top-0 rounded-5"
+                        style="max-width: 190px; width:100%; max-height: 180px; height: 100%;">
+                    <p class="fs-5 mt-3 mb-1">Y2K T-shirt Vintage</p>
+                    <div class="d-flex flex-wrap text-warning justify-content-center align-items-center">
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-half me-2"></i>
+                        <span class="text-dark fs-5 me-2">4.5/5</span>
+                    </div>
+                    <span class="text-dark fs-5 me-2 mt-2">$120</span>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 justify-content-center text-center fw-bold">
+                    <img src="/img/TStar_Girl.jpg" alt=""
+                        class="img-fluid ps-3 pe-3 border border-3 border-top-0 rounded-5"
+                        style="max-width: 190px; width:100%; max-height: 180px; height: 100%;">
+                    <p class="fs-5 mt-3 mb-1">Y2K Tstar Girl</p>
+                    <div class="d-flex flex-wrap text-warning justify-content-center align-items-center">
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-half me-2"></i>
+                        <i class="bi bi-star me-2"></i>
+                        <span class="text-dark fs-5 me-2">3.5/5</span>
+                    </div>
+                    <span class="text-dark fs-5 me-2 mt-2">$240</span><span
+                        class="text-secondary fs-5 text-decoration-line-through">$260</span>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 justify-content-center text-center fw-bold">
+                    <img src="/img/Style_Street.jpg" alt="" class="img-fluid border border-3 border-top-0 rounded-5"
+                        style="max-width: 190px; width:100%; max-height: 180px; height: 100%;">
+                    <p class="fs-5 mt-3 mb-1">New Style Street</p>
+                    <div class="d-flex flex-wrap text-warning justify-content-center align-items-center">
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-half me-2"></i>
+                        <span class="text-dark fs-5 me-2">4.5/5</span>
+                    </div>
+                    <span class="text-dark fs-5 me-2 mt-2">$240</span><span
+                        class="text-secondary fs-5 text-decoration-line-through">$260</span>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 justify-content-center text-center fw-bold">
+                    <img src="/img/Retro_Look.jpg" alt="" class="img-fluid border border-3 border-top-0 rounded-5"
+                        style="max-width: 190px; width:100%; max-height: 180px; height: 100%;">
+                    <p class="fs-5 mt-3 mb-1">Camiseta Retro Look</p>
+                    <div class="d-flex flex-wrap text-warning justify-content-center align-items-center">
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-half me-2"></i>
+                        <span class="text-dark fs-5 me-2">4.5/5</span>
+                    </div>
+                    <span class="text-dark fs-5 me-2 mt-2">$130</span><span
+                        class="text-secondary fs-5 text-decoration-line-through">$160</span>
+
+                </div>
+            </div>
+            <div class="d-flex justify-content-center w-100">
+                <button class="btn btn-outline-dark w-25 rounded-5 mt-3">Ver todo</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="font-family: 'Play', sans-serif;">
+        <div class="text-center mb-5">
+            <h1 class="fs-1 fw-bold">LO MÁS VENDIDO</h1>
+        </div>
+        <div
+            class="container justify-content-center mb-5 pb-5 border border-3 border-top-0 border-start-0 border-end-0">
+            <div class="row justify-content-center g-4">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 justify-content-center text-center fw-bold">
+                    <img src="/img/Lo_mas_vendido/GirlAesthetic.jpg" alt=""
+                        class="img-fluid border border-3 border-top-0 rounded-5"
+                        style="max-width: 190px; width:100%; max-height: 180px; height: 100%;">
+                    <p class="fs-5 mt-3 mb-1">Girl Aesthetic Destroyed Jeans</p>
+                    <div class="d-flex flex-wrap text-warning justify-content-center align-items-center">
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <span class="text-dark fs-5">5.0/5</span>
+                    </div>
+                    <span class="fs-5">$212</span><span
+                        class="text-secondary text-decoration-line-through fs-5 me-2 ms-2">$232</span>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 justify-content-center text-center fw-bold">
+                    <img src="/img/Lo_mas_vendido/GinebraY2KChaqueta.jpg" alt=""
+                        class="img-fluid border border-3 border-top-0 rounded-5"
+                        style="max-width: 190px; width:100%; max-height: 180px; height: 100%;">
+                    <p class="fs-5 mt-3 mb-1">GINEBRA Y2K - Chaqueta</p>
+                    <div class="d-flex flex-wrap text-warning justify-content-center align-items-center">
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star me-2"></i>
+                        <span class="text-dark fs-5">4.0/5</span>
+                    </div>
+                    <span class="fs-5">$145</span>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 justify-content-center text-center fw-bold">
+                    <img src="/img/Lo_mas_vendido/PantalonesCortosdeMezclilla.jpg" alt=""
+                        class="img-fluid border border-3 border-top-0 rounded-5"
+                        style="max-width: 190px; width:100%; max-height: 180px; height: 100%;">
+                    <p class="fs-5 mt-3 mb-1">Pantalones Cortos de Mezclilla</p>
+                    <div class="d-flex flex-wrap text-warning justify-content-center align-items-center">
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star me-2"></i>
+                        <i class="bi bi-star me-2"></i>
+                        <span class="text-dark fs-5">3.0/5</span>
+                    </div>
+                    <span class="fs-5">$80</span>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 justify-content-center text-center fw-bold">
+                    <img src="/img/Lo_mas_vendido/FadedSkinny.jpg" alt=""
+                        class="img-fluid border border-3 border-top-0 rounded-5"
+                        style="max-width: 190px; width:100%; max-height: 180px; height: 100%;">
+                    <p class="fs-5 mt-3 mb-1">Faded Skinny Jeans</p>
+                    <div class="d-flex flex-wrap text-warning justify-content-center align-items-center">
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-fill me-2"></i>
+                        <i class="bi bi-star-half me-2"></i>
+                        <span class="text-dark fs-5">4.5/5</span>
+                    </div>
+                    <span class="fs-5">$80</span>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center w-100">
+                <button class="btn btn-outline-dark w-25 rounded-5 mt-3">Ver todo</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="ms-2 me-2 bg-light rounded-4 p-4 mt-5 mb-5 w-100">
+        <h3 class="text-center fw-bold mb-4">ELIGE SEGÚN TU ESTILO</h3>
+
+        <div class="d-grid estilos-grid">
+
+            <div class="bg-white rounded-4 shadow-sm overflow-hidden text-center">
+                <img src="/img/estilos/casual.jpg" alt="Casual" class="img-fluid estilo-img"
+                    style="max-height: 260px; object-fit: cover; width: 100%;">
+            </div>
+
+            <div class="bg-white rounded-4 shadow-sm overflow-hidden text-center" style="grid-column: span 2;">
+                <picture>
+                    <source srcset="/img/estilos/formal-2.jpg" media="(max-width: 1025px)">
+                    <img src="/img/estilos/formal.jpg" alt="Party" class="img-fluid estilo-img">
+                </picture>
+            </div>
+
+            <div class="bg-white rounded-4 shadow-sm overflow-hidden text-center" style="grid-column: span 2;">
+                <picture>
+                    <source srcset="/img/estilos/party-2.jpg" media="(max-width: 1025px)">
+                    <img src="/img/estilos/party.jpg" alt="Party" class="img-fluid estilo-img">
+                </picture>
+            </div>
+
+            <div class="bg-white rounded-4 shadow-sm overflow-hidden text-center">
+                <img src="/img/estilos/gym.jpg" alt="Gym" class="img-fluid estilo-img"
+                    style="max-height: 280px; object-fit: cover; width: 100%;">
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+
+        <div class="newsletter-container">
+            <div class="newsletter-box">
+                <h2>MANTENTE INFORMADO SOBRE NUESTRAS ÚLTIMAS OFERTAS</h2>
+
+                <div class="email-subscription">
+                    <input type="email" placeholder="Enter your email address" class="email-input">
+                    <button class="subscribe-btn">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>COMPANY</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Works</a></li>
+                    <li><a href="#">Career</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>HELP</h4>
+                <ul>
+                    <li><a href="#">Customer Support</a></li>
+                    <li><a href="#">Delivery Details</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>FAQ</h4>
+                <ul>
+                    <li><a href="#">Account</a></li>
+                    <li><a href="#">Manage Deliveries</a></li>
+                    <li><a href="#">Orders</a></li>
+                    <li><a href="#">Payments</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>RESOURCES</h4>
+                <ul>
+                    <li><a href="#">Free eBooks</a></li>
+                    <li><a href="#">Development Tutorial</a></li>
+                    <li><a href="#">How to - Blog</a></li>
+                    <li><a href="#">Youtube Playlist</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>Shop.co © 2000-2023, All Rights Reserved</p>
+        </div>
+    </footer>
+
+
+
+
+
+    <script src="/js/menu.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
