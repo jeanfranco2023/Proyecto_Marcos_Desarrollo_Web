@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpServletRequest;
 import proyect.app.dto.Login;
 import proyect.app.entity.usuarios;
 import proyect.app.repository.UsuarioRepository;
@@ -63,12 +64,13 @@ public class UsuarioController {
     }
 
     @GetMapping("/principal")
-    public String principal(Model model) {
+    public String principal(Model model, HttpServletRequest respuesta) {
         if (usuarioIniciado != null) {
             model.addAttribute("usuario", usuarioIniciado.getNombreUsuario());
             return "principal";
         } else {
             return "redirect:/users/login";
         }
+        
     }
 }
