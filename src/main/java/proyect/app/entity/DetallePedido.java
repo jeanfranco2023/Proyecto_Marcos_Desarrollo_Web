@@ -14,18 +14,20 @@ import lombok.ToString;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
-@Table(name = "productos")
-public class Productos {
+@Table(name = "detalle_pedido")
+public class DetallePedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idProducto;
-    private String nombreProducto;
-    private String descripcionProducto;
-    private String categoriaProducto;
+    private Integer idDetallePedido;
     @ManyToOne
-    @JoinColumn(name = "id_categoria")
-    private Categoria categoria;
+    @JoinColumn(name = "id_pedido")
+    private Pedido pedido;
+    @ManyToOne
+    @JoinColumn(name = "id_producto")
+    private Productos producto;
+    private Integer cantidad;
+    private Double precioProducto;
 }

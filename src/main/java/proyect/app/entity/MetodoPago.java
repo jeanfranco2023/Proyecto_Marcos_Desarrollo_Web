@@ -1,11 +1,12 @@
 package proyect.app.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,18 +15,15 @@ import lombok.ToString;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
-@Table(name = "productos")
-public class Productos {
+@Table(name = "metodos_pago")
+public class MetodoPago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idProducto;
-    private String nombreProducto;
-    private String descripcionProducto;
-    private String categoriaProducto;
-    @ManyToOne
-    @JoinColumn(name = "id_categoria")
-    private Categoria categoria;
+    private Integer idMetodoPago;
+    private String nombreMetodoPago;
+     @OneToMany(mappedBy = "metodoPago")
+    private List<Pago> pagos;
 }

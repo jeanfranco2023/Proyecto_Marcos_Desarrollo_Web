@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
 import proyect.app.dto.Login;
-import proyect.app.entity.usuarios;
+import proyect.app.entity.Usuarios;
 import proyect.app.repository.UsuarioRepository;
 import proyect.app.service.UsuarioService;
 
@@ -24,19 +24,19 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    private usuarios usuarioIniciado;
+    private Usuarios usuarioIniciado;
 
     @GetMapping("/login")
     public String loginForm(Model model) {
         model.addAttribute("login", new Login());
-        model.addAttribute("usuario", new usuarios());
+        model.addAttribute("usuario", new Usuarios());
         return "index";
     }
 
     @PostMapping("/logeo")
     public String login(Login login, Model model, RedirectAttributes redirectAttributes) {
         
-        Optional<usuarios> usuarioOptional = usuarioRepository.findByCorreoUsuario(login.getEmail());
+        Optional<Usuarios> usuarioOptional = usuarioRepository.findByCorreoUsuario(login.getEmail());
 
         if (usuarioOptional.isPresent()) {
             usuarioIniciado = usuarioOptional.get();
@@ -53,7 +53,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/registro")
-    public String registroUsuarios(@ModelAttribute("usuario") usuarios usuario, Model model) {
+    public String registroUsuarios(@ModelAttribute("usuario") Usuarios usuario, Model model) {
         if (usuarioService.buscarPorcorreoUsuario(usuario.getCorreoUsuario()) == null) {
             usuarioService.insertar(usuario);
             return "redirect:/users/login";

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpSession;
 import proyect.app.dto.Login;
-import proyect.app.entity.usuarios;
+import proyect.app.entity.Usuarios;
 import proyect.app.repository.UsuarioRepository;
 
 @RestController
@@ -37,7 +37,7 @@ public class restcontroller {
         Map<String, Object> usuarios = new HashMap<>();
 
         int index = 1;
-        for (usuarios usuario : usuarioRepository.findAll()) {
+        for (Usuarios usuario : usuarioRepository.findAll()) {
             Map<String, Object> usuarioMap = new HashMap<>();
             usuarioMap.put("id", usuario.getIdUsuario());
             usuarioMap.put("nombre", usuario.getNombreUsuario());
@@ -65,7 +65,7 @@ public class restcontroller {
     }
 
     @PostMapping("/usuarios/insertar")
-    public Map<String, Object> insertarUsuario(@RequestBody usuarios usuario) {
+    public Map<String, Object> insertarUsuario(@RequestBody Usuarios usuario) {
         if (usuario.getNombreUsuario() == null || usuario.getCorreoUsuario() == null
                 || usuario.getContrasenaUsuario() == null) {
             return Map.of("mensaje", "Faltan datos para registrar el usuario");
@@ -76,7 +76,7 @@ public class restcontroller {
         if (usuario.getContrasenaUsuario().length() == 9) {
             return Map.of("mensaje", "La contraseña debe tener 9 caracteres");
         }
-        usuarios nuevoUsuario = usuarioRepository.save(usuario);
+        Usuarios nuevoUsuario = usuarioRepository.save(usuario);
         return Map.of("mensaje", "Usuario registrado con éxito", "usuario", nuevoUsuario);
     }
 
@@ -86,7 +86,7 @@ public class restcontroller {
             return Map.of("mensaje", "Faltan datos para iniciar sesión");
         }
 
-        usuarios usuarioEncontrado = usuarioRepository.findByCorreoUsuario(loginDTO.getEmail()).orElse(null);
+        Usuarios usuarioEncontrado = usuarioRepository.findByCorreoUsuario(loginDTO.getEmail()).orElse(null);
         if (usuarioEncontrado == null) {
             return Map.of("mensaje", "Usuario no encontrado");
         }
@@ -126,14 +126,14 @@ public class restcontroller {
     }
 
     @GetMapping("/datos")
-    public usuarios getDatos(
+    public Usuarios getDatos(
             @RequestParam String nombre,
             @RequestParam String apellido,
             @RequestParam String celular,
             @RequestParam String correo,
             @RequestParam String contrasena) {
 
-        usuarios usuario = new usuarios();
+        Usuarios usuario = new Usuarios();
         usuario.setNombreUsuario(nombre);
         usuario.setApellidoUsuario(apellido);
         usuario.setNumeroTelefonoUsuario(Integer.parseInt(celular));
@@ -145,7 +145,7 @@ public class restcontroller {
     @GetMapping("/guardar/correo")
     public ResponseEntity<?> guardarCorreoEnSesion(@RequestParam String correo, HttpSession session) {
         session.setAttribute("correo", correo);
-        Optional<usuarios> usuarioOpt = usuarioRepository.findByCorreoUsuario(correo);
+        Optional<Usuarios> usuarioOpt = usuarioRepository.findByCorreoUsuario(correo);
         Map<String, Object> response = new HashMap<>();
         response.put("mensaje", "Correo guardado en sesión");
         response.put("usuario", usuarioOpt.get());
@@ -161,7 +161,7 @@ public class restcontroller {
                     .body(Map.of("mensaje", "No se encontró correo en la sesión"));
         }
 
-        Optional<usuarios> usuarioOpt = usuarioRepository.findByCorreoUsuario(correo);
+        Optional<Usuarios> usuarioOpt = usuarioRepository.findByCorreoUsuario(correo);
         if (usuarioOpt.isPresent()) {
             return ResponseEntity.ok(usuarioOpt.get());
         } else {
@@ -180,7 +180,7 @@ public class restcontroller {
                     .body(Map.of("mensaje", "No se encontró nombre en la sesión"));
         }
         
-        Optional<usuarios> usuarioOpt = usuarioRepository.findByCorreoUsuario(correo);
+        Optional<Usuarios> usuarioOpt = usuarioRepository.findByCorreoUsuario(correo);
         if (usuarioOpt.isPresent()) {
             nombre = usuarioOpt.get().getNombreUsuario();
             apellido = usuarioOpt.get().getApellidoUsuario();
