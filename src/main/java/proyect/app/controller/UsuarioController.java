@@ -34,7 +34,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/logeo")
-    public String login(Login login, Model model, RedirectAttributes redirectAttributes) {
+    public String login(Login login,  RedirectAttributes redirectAttributes) {
         
         Optional<Usuarios> usuarioOptional = usuarioRepository.findByCorreoUsuario(login.getEmail());
 

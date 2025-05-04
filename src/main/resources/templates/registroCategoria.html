@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Categoría</title>
+</head>
+<body>
+    <header>
+        <h1>Registro de Categoría</h1>
+    </header>
+    <main>
+        <form th:action="@{/productos/guardarCategoria}" th:object="${categorias}" method="POST">
+            <input type="hidden" th:field="*{idCategoria}"/>
+            <label for="nombre">Nombre de la Categoría:</label>
+            <input type="text" id="nombre" th:field="*{nombreCategoria}" required>
+            
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" th:field="*{descripcionCategoria}" rows="4" required></textarea>
+            
+            <button type="submit">Registrar</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="categoria : ${listaCategorias}">
+                    <td th:text="${categoria.idCategoria}"></td>
+                    <td th:text="${categoria.nombreCategoria}"></td>
+                    <td th:text="${categoria.descripcionCategoria}"></td>
+                </tr>
+            </tbody>
+    </main>
+</body>
+</html>

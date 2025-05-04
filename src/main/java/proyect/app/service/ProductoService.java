@@ -3,10 +3,12 @@ package proyect.app.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import proyect.app.entity.Productos;
 import proyect.app.repository.ProductoRepository;
 
+@Service
 public class ProductoService implements ServicesInterface<Productos> {
     @Autowired
     private ProductoRepository productoRepository;
@@ -29,6 +31,10 @@ public class ProductoService implements ServicesInterface<Productos> {
     @Override
     public void eliminar(Productos producto) {
         productoRepository.delete(producto);
+    }
+
+    public Object buscarPorNombreProducto(String nombreProducto) {
+        return productoRepository.findByNombreProducto(nombreProducto);
     }
 
 }

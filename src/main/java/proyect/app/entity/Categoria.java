@@ -6,18 +6,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Table(name = "categorias")
 public class Categoria {
     @Id
@@ -25,6 +23,11 @@ public class Categoria {
     private Integer idCategoria;
     private String nombreCategoria;
     private String descripcionCategoria;
-    @OneToMany(mappedBy = "categoria")
+    @ManyToMany(mappedBy = "categorias")
     private List<Productos> productos;
+
+    @Override
+    public String toString() {
+        return nombreCategoria;
+    }
 }

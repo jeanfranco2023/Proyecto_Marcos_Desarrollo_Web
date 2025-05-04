@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto</title>
+</head>
+<body>
+    <header>
+        <h1>Agregar Producto</h1>
+    </header>
+    <main>
+        <form th:action="@{/productos/guardarProducto}" th:object="${producto}" method="POST">
+            <input type="hidden" th:field="*{idProducto}"/>
+            <label for="nombre">Nombre del Producto:</label>
+            <input type="text" id="nombreProducto" th:field="*{nombreProducto}" required>
+
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcionProducto" th:field="*{descripcionProducto}" required></textarea>
+
+            <label for="precio">Precio:</label>
+            <input type="number" id="precioProducto" th:field="*{precioProducto}" step="0.01" required>
+
+            <label for="categoria">Categoría:</label>
+            <select id="categoria" th:field="*{categorias}" required>
+                <option value="" disabled selected>Selecciona una categoría</option>
+                <option th:each="categoria : ${categorias}" th:value="${categoria.idCategoria}" th:text="${categoria.nombreCategoria}"></option>
+            </select>
+            <button type="submit">Agregar</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Categoría</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="producto : ${productos}">
+                    <td th:text="${producto.idProducto}"></td>
+                    <td th:text="${producto.nombreProducto}"></td>
+                    <td th:text="${producto.descripcionProducto}"></td>
+                    <td th:text="${producto.precioProducto}"></td>
+                    <td th:text="${producto.stockProducto}"></td>
+                    <td th:text="${producto.categorias}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    <footer>
+        <p>&copy; 2023 Proyecto Marcos de Desarrollo Web</p>
+    </footer>
+</body>
+</html>
