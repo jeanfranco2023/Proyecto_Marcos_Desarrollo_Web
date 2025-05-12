@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{componentes/navbar::head(titulo=ROPAS)}"></head>
+
+<body class="bg-light">
+    <div th:replace="~{componentes/navbar::navbar}"></div>
+
+    <div class="container-fluid mt-3 pt-3">
+        <div class="row">
+            <!-- Versión móvil: Botón y dropdown de filtros -->
+            <div class="d-lg-none mb-2 position-relative">
+                <button class="btn btn-outline-secondary w-100 filter-toggle" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#filterCollapseMobile" aria-expanded="false" aria-controls="filterCollapseMobile">
+                    <i class="bi bi-funnel-fill me-2"></i> Filtros
+                </button>
+
+                <div class="collapse position-absolute w-100 z-3 filter-dropdown" id="filterCollapseMobile">
+                    <div class="card rounded-0 rounded-bottom">
+                        <div class="card-body p-3">
+                            <!-- Contenido de los filtros móvil -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Categoría</label>
+                                <select class="form-select">
+                                    <option value="" selected>Todas las categorías</option>
+                                    <option th:each="categoria : ${categorias}" th:value="${categoria.idCategoria}"
+                                        th:text="${categoria.nombreCategoria}"></option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Precio: $50 - $200</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="me-2">$50</span>
+                                    <input type="range" class="form-range" min="50" max="500" step="10" value="200">
+                                    <span class="ms-2">$500</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <h5 class="fw-bold">Tamaño</h5>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="sizeXSMobile">
+                                            <label class="form-check-label" for="sizeXSMobile">XK-Small</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <!-- Más opciones de tamaño... -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <h5 class="fw-bold">Estilo</h5>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="styleCasualMobile">
+                                    <label class="form-check-label" for="styleCasualMobile">Casual</label>
+                                </div>
+                                <!-- Más opciones de estilo... -->
+                            </div>
+
+                            <button class="btn btn-dark w-100 mt-2">Aplicar Filtro</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Versión desktop: Sidebar de filtros (30%) -->
+            <div class="col-lg-3 d-none d-lg-block filter-sidebar">
+                <div class="card mb-3 sticky-top" style="top: 80px;">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">Filtros</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Contenido de los filtros desktop -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Categoría</label>
+                            <select class="form-select">
+                                <option value="" selected>Todas las categorías</option>
+                                <option th:each="categoria : ${categorias}" th:value="${categoria.idCategoria}"
+                                    th:text="${categoria.nombreCategoria}"></option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Precio: $50 - $200</label>
+                            <div class="d-flex align-items-center">
+                                <span class="me-2">$50</span>
+                                <input type="range" class="form-range" min="50" max="500" step="10" value="200">
+                                <span class="ms-2">$500</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <h5 class="fw-bold">Tamaño</h5>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="sizeXSMobile">
+                                        <label class="form-check-label" for="sizeXSMobile">XK-Small</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="sizeSMobile">
+                                        <label class="form-check-label" for="sizeSMobile">Small</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="sizeMMobile">
+                                        <label class="form-check-label" for="sizeMMobile">Moldum</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="sizeNMobile">
+                                        <label class="form-check-label" for="sizeNMobile">NIPS</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="sizeXLMobile">
+                                        <label class="form-check-label" for="sizeXLMobile">XL-Large</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="sizeXXLMobile">
+                                        <label class="form-check-label" for="sizeXXLMobile">XX-Large</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <h5 class="fw-bold">Estilo</h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="styleCasualMobile">
+                                <label class="form-check-label" for="styleCasualMobile">Casual</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="styleFormalMobile">
+                                <label class="form-check-label" for="styleFormalMobile">Formel</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="styleFiletlaMobile">
+                                <label class="form-check-label" for="styleFiletlaMobile">Filetla</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="styleGymMobile">
+                                <label class="form-check-label" for="styleGymMobile">Gym</label>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-dark w-100">Aplicar Filtro</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna de productos (70%) - Derecha -->
+            <div class="container col-md-9 pb-4 border-bottom border-2">
+                <div class="d-flex flex-column justify-content-between align-items-center mb-3 w-100">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="sortDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Ordenar por: Más populares
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                            <li><a class="dropdown-item" href="#">Más populares</a></li>
+                            <li><a class="dropdown-item" href="#">Precio: menor a mayor</a></li>
+                            <li><a class="dropdown-item" href="#">Precio: mayor a menor</a></li>
+                            <li><a class="dropdown-item" href="#">Novedades</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="container-fluid mt-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row g-2">
+                                <div class="col-sm-6 col-md-4 col-lg-3" th:each="productos : ${productos}">
+                                    <!-- Card con altura completa y margen -->
+                                    <div class="card h-100 mx-2 d-flex flex-column">
+                                        <!-- Imagen del producto (parte superior fija) -->
+                                        <div class="d-flex justify-content-center align-items-center p-2"
+                                            style="height: 240px;">
+                                            <img th:src="@{/img/ropas/{nombreImagen}(nombreImagen=${productos.imagenProducto})}"
+                                                class="img-fluid rounded-3" alt="Producto"
+                                                style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                                        </div>
+
+                                        <!-- Cuerpo de la Card con flex-grow para ocupar espacio restante -->
+                                        <div class="card-body d-flex flex-column">
+                                            <h5 class="card-title fs-6" th:text="${productos.nombreProducto}"></h5>
+
+                                            <!-- Rating con estrellas -->
+                                            <div class="d-flex text-warning fs-6">
+                                                <div class="d-flex align-items-center text-warning fs-6"
+                                                    th:utext="${productos.generarEstrellas()}"></div>
+                                            </div>
+
+                                            <!-- Precio -->
+                                            <div class="d-flex align-items-center mt-2">
+                                                <span class="fw-bold">S/.</span>
+                                                <span class="card-text fs-5 fw-bold"
+                                                    th:text="${productos.precioProducto}"></span>
+                                            </div>
+
+                                            <!-- Contenedor de badges que se pega abajo -->
+                                            <div class="mt-auto">
+                                                <div class="d-flex justify-content-between">
+                                                    <span class="badge bg-primary">Casual</span>
+                                                    <span class="badge bg-secondary"
+                                                        th:text="${productos.getCategoriasText()}"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{componentes/footer::footer}"></div>
+</body>
+
+</html>

@@ -2,6 +2,8 @@ package proyect.app.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,8 +32,10 @@ public class Usuarios {
     private String correoUsuario;
     private String contrasenaUsuario;
     private boolean isAdmin;
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario")
     private List<Pedido> pedidos;
+    @JsonIgnore
     @OneToOne(mappedBy = "usuario")
     private Carrito carrito;
 }

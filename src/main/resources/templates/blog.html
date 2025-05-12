@@ -1,0 +1,46 @@
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head th:replace="~{componentes/navbar::head(titulo=ROPAS)}">
+    </head>
+
+    <body class="bg-light">
+        <div th:replace="~{componentes/navbar::navbar}"></div>
+        <div class="container py-4">
+
+            <!-- Título del blog -->
+            <h1 class="blog-title">Blog</h1>
+
+            <div class="post-container">
+                <!-- Imagen -->
+                <img src="/img/blog-JohnDoe.jpg" alt="Imagen del post" class="post-image">
+
+                <!-- Contenido -->
+                <div class="post-content">
+                    <h2 class="post-title">LOREM IPSUM</h2>
+
+                    <div class="post-meta">
+                        <span class="post-author">John Doe</span>
+                        <span class="post-date">May 20</span>
+                    </div>
+
+                    <div class="post-text">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean a dictum sapien. Curabitur 
+                            rhoncus in justo et ultrices. In hac habitasse platea dictumst. In fermentum ex eget turpis 
+                            mollis mollis. Suspendisse potenti. Nam at rhoncus justo. Pellentesque in laoreet orci. Nulla 
+                            posuere varius euismod. Orci varius natoque penatibus et magnis dis parturient montes, nascetur 
+                            ridiculus mus. Sed ut magna eu nisl cursus cursus. Aliquam erat volutpat. Proin convallis arcu 
+                            eget nunc feugiat, a congue nisi placerat. Nunc non justo nunc. Fusce quis auctor dui. Duis 
+                            feugiat purus nec ante viverra, porttitor volutpat lacus ultrices. Pellentesque quis elit 
+                            sodales arcu vulputate aliquet sed vitae ante. Fusce.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="~{componentes/footer::footer}"></div>
+    </body>
+
+    </html>

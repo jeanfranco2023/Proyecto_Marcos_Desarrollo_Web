@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    
+<head th:replace="~{componentes/navbar::head(titulo=SHOP.CO)}">
+</head>
+<body>
+    <div th:replace="~{componentes/navbar::navbar}"></div>
+
+<div class="container mt-3">
+        <div class="product-container">
+            <div class="product-images">
+                <div class="thumbnail-container" id="thumbnailContainer">
+                    
+                </div>
+                <div class="main-image-container">
+                    <img src="/img/camisas/camisa-cargo-de-color-solido1-az.jpg" class="main-image" id="mainImage" alt="Camisa cargo">
+                </div>
+            </div>
+            
+            <div class="product-details">
+                <h1 class="product-title">CAMISA CARGO DE COLOR SÓLIDO</h1>
+                
+                <div class="product-rating">
+                    <div class="stars">★★★★★</div>
+                    <span>4.5/5</span>
+                </div>
+                
+                <div class="price-container">
+                    <span class="current-price">$260</span>
+                    <span class="original-price">$300</span>
+                    <span class="discount">-40%</span>
+                </div>
+                
+                <p class="product-description">
+                    Camisa cargo de alta calidad con múltiples bolsillos. Ideal para uso casual o actividades al aire libre.
+                </p>
+                
+                <div class="color-selector">
+                    <span class="selector-title">COLOR</span>
+                    <div class="color-options">
+                        <div class="color-option selected" data-color="azul" style="background-color: #2a5caa;"></div>
+                        <div class="color-option" data-color="marron" style="background-color: #8b4513;"></div>
+                        <div class="color-option" data-color="negro" style="background-color: #333;"></div>
+                        <div class="color-option" data-color="verde" style="background-color: #228b22;"></div>
+                    </div>
+                </div>
+                
+                <div class="size-selector">
+                    <span class="selector-title">TALLA</span>
+                    <div class="size-options">
+                        <div class="size-option">Small</div>
+                        <div class="size-option selected">Medium</div>
+                        <div class="size-option">Large</div>
+                        <div class="size-option">X-Large</div>
+                    </div>
+                </div>
+                
+                <div class="add-to-cart-section">
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus">-</button>
+                        <input type="text" class="quantity-input" value="1">
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <button class="add-to-cart">Añadir al carrito</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pestañas inferiores -->
+        <div class="product-tabs">
+            <div class="tab" data-tab="details">Detalles del Producto</div>
+            <div class="tab active" data-tab="reviews">Calificaciones y Reseñas</div>
+            <div class="tab" data-tab="faqs">FAQs</div>
+        </div>
+        
+        <div id="details" class="tab-content">
+            <h2>Detalles del Producto</h2>
+            <p>Información detallada sobre el producto:</p>
+            <p>Material: Algodón <br>
+                Composición: 100% Algodón<br>
+                Longitud: Regular<br>
+                Largo de manga: Sin mangas <br>
+                Tipo de manga: Mangas de camisa <br>
+                Detalles: Botón <br>
+                Estampado: Color liso<br>
+                Público objetivo: Hombre <br>
+                Escarpado: No <br>
+                Tela: Sin elasticidad <br>
+                Tipo de abertura: Media abertura <br>
+                Abertura: Una fila de botones <br>
+                Estilo de cuello: Solapa <br>
+                Tipo: Holgado <br>
+                Temporada: Primavera/Otoño</p>
+        </div>
+        
+        
+        <div id="faqs" class="tab-content">
+            <h2>FAQs</h2>
+            <div class="faq-item">
+                <h3>¿Cuáles son los tiempos de entrega?</h3>
+                <p>Los envíos estándar tardan de 3 a 5 días hábiles. Envíos express están disponibles con entrega en 48 horas (sujeto a disponibilidad).</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>¿Cómo puedo hacer un cambio o devolución?</h3>
+                <p>Aceptamos devoluciones dentro de los 30 días posteriores a la compra.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>¿Qué métodos de pago aceptan?</h3>
+                <p>Aceptamos: Tarjetas de crédito/débito (Visa, Mastercard, Amex), PayPal, transferencias bancarias y pagos en efectivo contra entrega (solo en algunas zonas).</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>¿Cómo sé qué talla elegir?</h3>
+                <p>Ofrecemos una <a href="#">guía de tallas</a> detallada para cada producto. Si necesitas asesoramiento personalizado, contacta a nuestro servicio al cliente.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>¿Hacen envíos internacionales?</h3>
+                <p>Sí, realizamos envíos a la mayoría de países. Los costos y tiempos varían según el destino. Calcula el costo durante el checkout.</p>
+            </div>
+        </div>
+
+        <div id="reviews" class="tab-content active">
+            <h2>Calificaciones y Reseñas</h2>
+            
+            <div class="reviews-grid">
+                <!-- Fila 1 -->
+                <div class="review">
+                    <div class="review-header">
+                        <div>
+                            <span class="review-author">Samantha D.</span>
+                            <div class="review-rating">★★★★★</div>
+                        </div>
+                        <span class="review-date">Posted on August 14, 2023</span>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut urna tempor, tristique ipsum a, pellentesque risus. Donec mi augue, mollis in dolor quis, viverra facilisis lorem.</p>
+                </div>
+                
+                <div class="review">
+                    <div class="review-header">
+                        <div>
+                            <span class="review-author">Ethan R.</span>
+                            <div class="review-rating">★★★★☆</div>
+                        </div>
+                        <span class="review-date">Posted on August 16, 2023</span>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut urna tempor, tristique ipsum a, pellentesque risus. Donec mi augue, mollis in dolor quis, viverra facilisis lorem.</p>
+                </div>
+                
+                <div class="review">
+                    <div class="review-header">
+                        <div>
+                            <span class="review-author">Alex M.</span>
+                            <div class="review-rating">★★★★☆</div>
+                        </div>
+                        <span class="review-date">Posted on August 15, 2023</span>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut urna tempor, tristique ipsum a, pellentesque risus. Donec mi augue, mollis in dolor quis, viverra facilisis lorem.</p>
+                </div>
+                
+                <!-- Fila 2 -->
+                <div class="review">
+                    <div class="review-header">
+                        <div>
+                            <span class="review-author">Olivia P.</span>
+                            <div class="review-rating">★★★★★</div>
+                        </div>
+                        <span class="review-date">Posted on August 17, 2023</span>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut urna tempor, tristique ipsum a, pellentesque risus. Donec mi augue, mollis in dolor quis, viverra facilisis lorem.</p>
+                </div>
+                
+                <div class="review">
+                    <div class="review-header">
+                        <div>
+                            <span class="review-author">Carlos T.</span>
+                            <div class="review-rating">★★★★★</div>
+                        </div>
+                        <span class="review-date">Posted on August 18, 2023</span>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut urna tempor, tristique ipsum a, pellentesque risus. Donec mi augue, mollis in dolor quis, viverra facilisis lorem.</p>
+                </div>
+                
+                <div class="review">
+                    <div class="review-header">
+                        <div>
+                            <span class="review-author">María G.</span>
+                            <div class="review-rating">★★★★☆</div>
+                        </div>
+                        <span class="review-date">Posted on August 19, 2023</span>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut urna tempor, tristique ipsum a, pellentesque risus. Donec mi augue, mollis in dolor quis, viverra facilisis lorem.</p>
+                </div>
+            </div>
+            
+            <div class="load-more-reviews">
+                <button id="loadMoreBtn">Ver mas reseñas</button>
+            </div>
+        </div>
+
+        
+        <div class="related-products">
+            <h3>TAMBIÉN TE PUEDE INTERESAR</h3>
+            
+            <div class="products-grid">
+                <!-- Producto 1 -->
+                <div class="product-card">
+                    <img src="/img/camisas/chaqueta-cortavientos-con-capucha-casual1-negra.jpg" alt="Chaqueta Cortavientos">
+                    <div class="product-info">
+                        <h4>Chaqueta Cortavientos con Capucha Casual</h4>
+                        <div class="rating">★★★★ <span>4.0</span></div>
+                        <div class="price">$145</div>
+                    </div>
+                </div>
+                
+                <!-- Producto 2 -->
+                <div class="product-card">
+                    <img src="/img/camisas/camiseta-gráfica-milano-italia1-negra.jpg" alt="Camiseta Milano">
+                    <div class="product-info">
+                        <h4>Camiseta Gráfica Milano Italia</h4>
+                        <div class="rating">★★★☆ <span>3.5</span></div>
+                        <div class="price">$120 <span class="original-price">$150</span> <span class="discount">30%</span></div>
+                    </div>
+                </div>
+                
+                <!-- Producto 3 -->
+                <div class="product-card">
+                    <img src="/img/camisas/sudadera-con-capucha-casual-de-mnga-larga-HELLSTAR.jpg" alt="Sudadera Hellstar">
+                    <div class="product-info">
+                        <h4>Sudadera con capucha casual de Manga larga HELLSTAR</h4>
+                        <div class="rating">★★★★☆ <span>4.5</span></div>
+                        <div class="price">$180</div>
+                    </div>
+                </div>
+                
+                <!-- Producto 4 -->
+                <div class="product-card">
+                    <img src="/img/camisas/jeans-rectos-multibolsillos-men-denim.jpg" alt="Jeans rectos">
+                    <div class="product-info">
+                        <h4>Jeans rectos con multibolsillos</h4>
+                        <div class="rating">★★★★★ <span>5.0</span></div>
+                        <div class="price">$212 <span class="original-price">$242</span> <span class="discount">20%</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div th:replace="~{componentes/footer::footer}"></div>
+        <script src="/js/productos.js"></script>
+</body>
+</html>

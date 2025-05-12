@@ -1,9 +1,7 @@
 package proyect.app.entity;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -14,6 +12,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -21,20 +20,17 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "categorias")
-@ToString
-public class Categoria {
+@ToString(exclude = "productos")
+@EqualsAndHashCode(exclude = "productos")
+@Table(name = "tallas")
+public class Talla {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCategoria;
-    private String nombreCategoria;
-    @ToString.Exclude
-    private String sexoCategoria;
-    @ToString.Exclude
-    private String descripcionCategoria;
-    @ToString.Exclude
+    private Integer id;
+    private String valor;
+    
+    @ManyToMany(mappedBy = "tallas")
     @JsonIgnore
-    @ManyToMany(mappedBy = "categorias")
-    @JsonBackReference
-    private Set<Productos> productos = new HashSet<>();
+    private Set<Productos> productos;
+
 }

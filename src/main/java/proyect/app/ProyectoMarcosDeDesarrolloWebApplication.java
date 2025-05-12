@@ -8,6 +8,6 @@ public class ProyectoMarcosDeDesarrolloWebApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoMarcosDeDesarrolloWebApplication.class, args);
-	}
+	}	
 
 }

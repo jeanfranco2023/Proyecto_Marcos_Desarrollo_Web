@@ -4,11 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,43 +17,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import jakarta.servlet.http.HttpSession;
 import proyect.app.dto.Login;
+import proyect.app.dto.ProductoDTO;
+import proyect.app.entity.Categoria;
+import proyect.app.entity.Productos;
 import proyect.app.entity.Usuarios;
 import proyect.app.repository.UsuarioRepository;
+import proyect.app.service.CategoriaService;
+import proyect.app.service.ProductoService;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(value = "http://localhost:4200")
 public class restcontroller {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private ProductoService productoService;
 
     @Autowired
-    private Environment enviromen;
+    private CategoriaService categoriaService;
 
     @GetMapping("/usuarios")
-    public Map<String, Object> getAll() {
-        Map<String, Object> usuarios = new HashMap<>();
-
-        int index = 1;
-        for (Usuarios usuario : usuarioRepository.findAll()) {
-            Map<String, Object> usuarioMap = new HashMap<>();
-            usuarioMap.put("id", usuario.getIdUsuario());
-            usuarioMap.put("nombre", usuario.getNombreUsuario());
-            usuarioMap.put("apellido", usuario.getApellidoUsuario());
-            usuarioMap.put("celular", usuario.getNumeroTelefonoUsuario());
-            usuarioMap.put("correo", usuario.getCorreoUsuario());
-            usuarioMap.put("contrasenia", usuario.getContrasenaUsuario());
-            usuarios.put("usuario_" + index++, usuarioMap);
-        }
-
-        if (usuarios.isEmpty()) {
-            return Map.of("mensaje", "No hay usuarios registrados");
-        }
-
-        return Map.of("usuarios", usuarios);
+    public List<Usuarios> getAll() {
+        List<Usuarios> usuarios = usuarioRepository.findAll();
+        return usuarios;
     }
 
     @GetMapping("/usuarios/contar")
@@ -78,6 +71,20 @@ public class restcontroller {
         }
         Usuarios nuevoUsuario = usuarioRepository.save(usuario);
         return Map.of("mensaje", "Usuario registrado con éxito", "usuario", nuevoUsuario);
+    }
+
+    @PostMapping("/usuarios/actualizar")
+    public Map<String, Object> actualizarUsuario(@RequestBody Usuarios usuario) {
+        if (usuario.getIdUsuario() == null) {
+            return Map.of("mensaje", "Faltan datos para actualizar el usuario");
+        }
+        Optional<Usuarios> usuarioExistente = usuarioRepository.findById(usuario.getIdUsuario());
+        if (usuarioExistente.isPresent()) {
+            Usuarios usuarioActualizado = usuarioRepository.save(usuario);
+            return Map.of("mensaje", "Usuario actualizado con éxito", "usuario", usuarioActualizado);
+        } else {
+            return Map.of("mensaje", "Usuario no encontrado");
+        }
     }
 
     @PostMapping("/usuarios/login")
@@ -128,23 +135,50 @@ public class restcontroller {
 
     @GetMapping("/datos/nombre")
     public ResponseEntity<?> obtenerNombreDesdeSesion(HttpSession sesion) {
-        String nombre , apellido;
+        String nombre, apellido;
         String correo = (String) sesion.getAttribute("correo");
 
         if (correo == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(Map.of("mensaje", "No se encontró nombre en la sesión"));
         }
-        
+
         Optional<Usuarios> usuarioOpt = usuarioRepository.findByCorreoUsuario(correo);
         if (usuarioOpt.isPresent()) {
             nombre = usuarioOpt.get().getNombreUsuario();
             apellido = usuarioOpt.get().getApellidoUsuario();
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(Map.of("mensaje", "Usuario no encontrado con el correo: " +correo));
+                    .body(Map.of("mensaje", "Usuario no encontrado con el correo: " + correo));
         }
 
         return ResponseEntity.ok(Map.of("nombre", nombre, "apellido", apellido));
+    }
+
+    @GetMapping("/detalles")
+    public List<ProductoDTO> listarProductosConDetalles() {
+        return productoService.listar().stream()
+                .map(ProductoDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @PostMapping("/productos/guardar")
+    public ResponseEntity<?> guardarProducto(@RequestBody Productos producto) {
+        if (producto.getNombreProducto() == null || producto.getPrecioProducto() == 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("mensaje", "Faltan datos para registrar el producto"));
+        }
+        if (productoService.buscarPorNombreProducto(producto.getNombreProducto()) != null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("mensaje", "El producto ya está registrado"));
+        }
+        productoService.insertar(producto);
+        return ResponseEntity.ok(Map.of("mensaje", "Producto registrado con éxito"));
+    }
+
+    @GetMapping("/categorias")
+    public List<Categoria> listarCategorias() {
+        List<Categoria> categorias = categoriaService.listar();
+        return categorias;
     }
 }

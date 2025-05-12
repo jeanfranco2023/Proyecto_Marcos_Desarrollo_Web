@@ -184,6 +184,11 @@ body {
     }
 }
 
+.link-hover:hover {
+    color: white !important;
+    background-color: #212529; /* mismo que btn-dark */
+}
+
 .estilos-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
