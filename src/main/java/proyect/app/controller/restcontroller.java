@@ -98,50 +98,6 @@ public class restcontroller {
         return Map.of("mensaje", "Inicio de sesión exitoso", "usuario", usuarioEncontrado);
     }
 
-    /*
-     * @PostMapping("/login")
-     * public ResponseEntity<?> logeo(@RequestBody Login login) {
-     * usuarios usuario =
-     * usuarioRepository.findByCorreoUsuario(login.getEmail()).orElse(null);
-     * 
-     * if (usuario == null ||
-     * !usuario.getContrasenaUsuario().equals(login.getPassword())) {
-     * return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-     * .body(Map.of("mensaje", "Credenciales inválidas"));
-     * }
-     * 
-     * String tokengenerated = token.generateToken(usuario.getCorreoUsuario());
-     * 
-     * return ResponseEntity.ok(Map.of(
-     * "token", tokengenerated,
-     * "usuario", usuario));
-     * }
-     */
-    @GetMapping("/values")
-    public Map<String, Object> getValues() {
-        Map<String, Object> values = new HashMap<>();
-        values.put("mensaje", enviromen.getProperty("config.message"));
-        values.put("CPU", enviromen.getProperty("config.mapeo", List.class));
-        return values;
-    }
-
-    @GetMapping("/datos")
-    public Usuarios getDatos(
-            @RequestParam String nombre,
-            @RequestParam String apellido,
-            @RequestParam String celular,
-            @RequestParam String correo,
-            @RequestParam String contrasena) {
-
-        Usuarios usuario = new Usuarios();
-        usuario.setNombreUsuario(nombre);
-        usuario.setApellidoUsuario(apellido);
-        usuario.setNumeroTelefonoUsuario(Integer.parseInt(celular));
-        usuario.setCorreoUsuario(correo);
-        usuario.setContrasenaUsuario(contrasena);
-        return usuario;
-    }
-
     @GetMapping("/guardar/correo")
     public ResponseEntity<?> guardarCorreoEnSesion(@RequestParam String correo, HttpSession session) {
         session.setAttribute("correo", correo);
