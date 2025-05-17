@@ -71,7 +71,7 @@ public class Productos {
     }
 
     public String generarEstrellas() {
-        double puntuacion = this.estrellasProducto; // Ej: 3.5
+        double puntuacion = this.estrellasProducto;
         StringBuilder estrellas = new StringBuilder();
 
         for (int i = 1; i <= 5; i++) {

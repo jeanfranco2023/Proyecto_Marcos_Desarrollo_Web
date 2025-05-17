@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head th:replace="~{componentes/navbar::head(titulo='SHOP.CO')}">
+</head>
+
+<body>
+    <div th:replace="~{componentes/navbar::navbar}"></div>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Lista de productos -->
+            <div class="col-lg-8">
+                <h3 class="mb-4 fw-bold">TU CARRITO</h3>
+                <div class="card mb-3" th:each="item : ${carritoItems}">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-md-3 text-center">
+                            <img th:src="@{/img/ropas/{nombreImagen}(nombreImagen=${item.producto.imagenProducto})}" class="img-fluid rounded-start p-2" style="max-height: 120px;">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title fw-semibold" th:text="${item.producto.nombreProducto}"></h5>
+                                <p class="mb-1">
+                                    Talla: <span class="badge bg-dark" th:text="${item.talla}"></span>
+                                </p>
+                                <p>
+                                    Color: <span class="badge bg-dark" th:text="${item.color}"></span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-end pe-4">
+                            <p class="mb-1">
+                                Cantidad: <span class="badge bg-primary" th:text="${item.cantidad}"></span>
+                            </p>
+                            <p class="mb-1">
+                                Precio: <span th:text="'$' + ${item.producto.precioProducto}"></span>
+                            </p>
+                            <p>
+                                <strong>Subtotal: </strong><span th:text="'$' + ${item.subtotal}"></span>
+                            </p>
+                            <!-- Formulario para eliminar -->
+                            <form th:action="@{/carrito/eliminar}" method="POST" style="display: inline;">
+                                <input type="hidden" name="productoId" th:value="${item.producto.idProducto}">
+                                <input type="hidden" name="talla" th:value="${item.talla}">
+                                <input type="hidden" name="color" th:value="${item.color}">
+                                <button type="submit" class="btn btn-sm btn-outline-danger mt-2 mb-2">Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen del pedido -->
+            <div class="col-lg-4">
+                <div class="card p-4">
+                    <h5 class="fw-bold mb-3">Resumen de Pedido</h5>
+                    <div class="d-flex justify-content-between">
+                        <span>Subtotal</span>
+                        <span th:text="'$' + ${subtotal}"></span>
+                    </div>
+                    <div class="d-flex justify-content-between text-danger" th:if="${descuento > 0}">
+                        <span>Descuento (-20%)</span>
+                        <span th:text="'-$' + ${descuento}"></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Delivery</span>
+                        <span th:text="'$' + ${envio}"></span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between fw-bold">
+                        <span>Total</span>
+                        <span th:text="'$' + ${total}"></span>
+                    </div>
+
+                    <div class="input-group mt-3">
+                        <input type="text" class="form-control" placeholder="Código de descuento">
+                        <button class="btn btn-outline-secondary" type="button">Aplicar</button>
+                    </div>
+
+                    <a th:href="@{/pago}" class="btn btn-dark w-100 mt-3">Ir a la caja →</a>
+                    <a th:href="@{/productos/ropa?categoria=Todas las categorias}" class="btn btn-outline-secondary w-100 mt-2">Seguir comprando</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="~{componentes/footer::footer}"></footer>
+</body>
+
+</html>

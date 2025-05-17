@@ -96,30 +96,10 @@
                         <div class="mb-3">
                             <h5 class="fw-bold">Tamaño</h5>
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="sizeXSMobile">
-                                        <label class="form-check-label" for="sizeXSMobile">XK-Small</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="sizeSMobile">
-                                        <label class="form-check-label" for="sizeSMobile">Small</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="sizeMMobile">
-                                        <label class="form-check-label" for="sizeMMobile">Moldum</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="sizeNMobile">
-                                        <label class="form-check-label" for="sizeNMobile">NIPS</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="sizeXLMobile">
-                                        <label class="form-check-label" for="sizeXLMobile">XL-Large</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="sizeXXLMobile">
-                                        <label class="form-check-label" for="sizeXXLMobile">XX-Large</label>
+                                <div class="col-12">
+                                    <div th:each="talla : ${tallas}" class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" th:id="'size' + ${talla.id}" th:value="${talla.id}" name="tallas">
+                                        <label class="form-check-label" th:for="'size' + ${talla.id}" th:text="${talla.valor}"></label>
                                     </div>
                                 </div>
                             </div>
@@ -172,43 +152,46 @@
                         <div class="col-md-12">
                             <div class="row g-2">
                                 <div class="col-sm-6 col-md-4 col-lg-3" th:each="productos : ${productos}">
-                                    <!-- Card con altura completa y margen -->
-                                    <div class="card h-100 mx-2 d-flex flex-column">
-                                        <!-- Imagen del producto (parte superior fija) -->
-                                        <div class="d-flex justify-content-center align-items-center p-2"
-                                            style="height: 240px;">
-                                            <img th:src="@{/img/ropas/{nombreImagen}(nombreImagen=${productos.imagenProducto})}"
-                                                class="img-fluid rounded-3" alt="Producto"
-                                                style="max-height: 100%; max-width: 100%; object-fit: contain;">
-                                        </div>
-
-                                        <!-- Cuerpo de la Card con flex-grow para ocupar espacio restante -->
-                                        <div class="card-body d-flex flex-column">
-                                            <h5 class="card-title fs-6" th:text="${productos.nombreProducto}"></h5>
-
-                                            <!-- Rating con estrellas -->
-                                            <div class="d-flex text-warning fs-6">
-                                                <div class="d-flex align-items-center text-warning fs-6"
-                                                    th:utext="${productos.generarEstrellas()}"></div>
+                                    <!-- Enlace que envuelve la tarjeta -->
+                                    <a th:href="@{/productos/producto/{idProducto}(idProducto=${productos.idProducto})}" class="text-decoration-none text-dark">
+                                        <!-- Card con altura completa y margen -->
+                                        <div class="card h-100 mx-2 d-flex flex-column">
+                                            <!-- Imagen del producto (parte superior fija) -->
+                                            <div class="d-flex justify-content-center align-items-center p-2"
+                                                style="height: 240px;">
+                                                <img th:src="@{/img/ropas/{nombreImagen}(nombreImagen=${productos.imagenProducto})}"
+                                                    class="img-fluid rounded-3" alt="Producto"
+                                                    style="max-height: 100%; max-width: 100%; object-fit: contain;">
                                             </div>
 
-                                            <!-- Precio -->
-                                            <div class="d-flex align-items-center mt-2">
-                                                <span class="fw-bold">S/.</span>
-                                                <span class="card-text fs-5 fw-bold"
-                                                    th:text="${productos.precioProducto}"></span>
-                                            </div>
+                                            <!-- Cuerpo de la Card con flex-grow para ocupar espacio restante -->
+                                            <div class="card-body d-flex flex-column">
+                                                <h5 class="card-title fs-6" th:text="${productos.nombreProducto}"></h5>
 
-                                            <!-- Contenedor de badges que se pega abajo -->
-                                            <div class="mt-auto">
-                                                <div class="d-flex justify-content-between">
-                                                    <span class="badge bg-primary">Casual</span>
-                                                    <span class="badge bg-secondary"
-                                                        th:text="${productos.getCategoriasText()}"></span>
+                                                <!-- Rating con estrellas -->
+                                                <div class="d-flex text-warning fs-6">
+                                                    <div class="d-flex align-items-center text-warning fs-6"
+                                                        th:utext="${productos.generarEstrellas()}"></div>
+                                                </div>
+
+                                                <!-- Precio -->
+                                                <div class="d-flex align-items-center mt-2">
+                                                    <span class="fw-bold">S/.</span>
+                                                    <span class="card-text fs-5 fw-bold"
+                                                        th:text="${productos.precioProducto}"></span>
+                                                </div>
+
+                                                <!-- Contenedor de badges que se pega abajo -->
+                                                <div class="mt-auto">
+                                                    <div class="d-flex justify-content-between">
+                                                        <span class="badge bg-primary">Casual</span>
+                                                        <span class="badge bg-secondary"
+                                                            th:text="${productos.getCategoriasText()}"></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>

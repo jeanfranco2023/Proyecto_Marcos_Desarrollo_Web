@@ -62,7 +62,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/registro")
-    public String registroUsuarios(@ModelAttribute("usuario") Usuarios usuario, Model model) {
+    public String registroUsuarios(@ModelAttribute Usuarios usuario, Model model) {
         if (usuarioService.buscarPorcorreoUsuario(usuario.getCorreoUsuario()) == null) {
             usuarioService.insertar(usuario);
             return "redirect:/users/login";

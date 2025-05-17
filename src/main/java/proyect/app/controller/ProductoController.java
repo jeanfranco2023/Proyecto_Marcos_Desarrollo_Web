@@ -51,6 +51,7 @@ public class ProductoController {
     public String listarRopa(@RequestParam String categoria, Model model, HttpSession usuario) {
         model.addAttribute("productos", productoService.listar());
         model.addAttribute("categorias", categoriaService.listar());
+        model.addAttribute("tallas", tallaService.listar());
         model.addAttribute("categoria", categoria);
         return "ropas";
     }
@@ -249,19 +250,17 @@ public class ProductoController {
         } else {
             return "redirect:/productos/registrar/categoria?error=Categoria ya existe";
         }
-        return "redirect:/productos/registrar/categoria";
+        return "redirect:/productos/registrar/categ oria";
     }
 
-    @GetMapping("/producto")
-    public String listarProductos(@RequestParam Integer idProducto, Model model) {
-        List<Productos> productos = productoService.listar();
-        List<Productos> productoFiltrados = productos.stream()
-                .filter(producto -> producto.getIdProducto().equals(idProducto))
-                .collect(Collectors.toList());
-        model.addAttribute("productoElegido", productoFiltrados);
+    @GetMapping("/producto/{idProducto}")
+    public String verProducto(@PathVariable Integer idProducto, Model model) {
+        Productos producto = productoService.buscarPorId(idProducto);
+        model.addAttribute("productoElegido", producto);
         model.addAttribute("categorias", categoriaService.listar());
         return "producto";
     }
+
 
     @ModelAttribute("categoriaHombres")
     public List<Categoria> getCategoriasHombres() {

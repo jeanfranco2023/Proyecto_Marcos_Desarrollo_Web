@@ -9,51 +9,51 @@
 <div class="container mt-3">
         <div class="product-container">
             <div class="product-images">
-                <div class="thumbnail-container" id="thumbnailContainer">
-                    
-                </div>
                 <div class="main-image-container">
-                    <img src="/img/camisas/camisa-cargo-de-color-solido1-az.jpg" class="main-image" id="mainImage" alt="Camisa cargo">
+                    <img th:src="@{/img/ropas/{nombreImagen}(nombreImagen=${productoElegido.imagenProducto})}" class="main-image" id="mainImage" alt="Camisa cargo">
                 </div>
             </div>
             
             <div class="product-details">
-                <h1 class="product-title">CAMISA CARGO DE COLOR SÓLIDO</h1>
+                <h1 class="product-title" th:text="${productoElegido.nombreProducto}"></h1>
                 
                 <div class="product-rating">
-                    <div class="stars">★★★★★</div>
-                    <span>4.5/5</span>
+                    <div class="stars" th:utext="${productoElegido.generarEstrellas()}"></div>
                 </div>
                 
                 <div class="price-container">
-                    <span class="current-price">$260</span>
-                    <span class="original-price">$300</span>
-                    <span class="discount">-40%</span>
+                    <span class="fs-3 fw-bold">S/.</span>
+                    <span class="fs-3 fw-bold" th:text="${productoElegido.precioProducto}"></span>
                 </div>
                 
                 <p class="product-description">
-                    Camisa cargo de alta calidad con múltiples bolsillos. Ideal para uso casual o actividades al aire libre.
+                    <span th:text="${productoElegido.descripcionProducto}"></span>
                 </p>
                 
-                <div class="color-selector">
-                    <span class="selector-title">COLOR</span>
-                    <div class="color-options">
-                        <div class="color-option selected" data-color="azul" style="background-color: #2a5caa;"></div>
-                        <div class="color-option" data-color="marron" style="background-color: #8b4513;"></div>
-                        <div class="color-option" data-color="negro" style="background-color: #333;"></div>
-                        <div class="color-option" data-color="verde" style="background-color: #228b22;"></div>
+            <div class="color-selector">
+                <span class="selector-title fw-bold">COLOR</span>
+                <div class="color-options d-flex gap-2">
+                    <div th:each="color, iterStat : ${productoElegido.colores}"
+                        class="color-option"
+                        th:classappend="${iterStat.index == 0} ? ' selected' : ''"
+                        th:attr="data-color=${color.nombre}"
+                        th:style="'background-color:' + ${color.codigoHex}"
+                        th:title="${color.nombre}">
                     </div>
                 </div>
-                
-                <div class="size-selector">
-                    <span class="selector-title">TALLA</span>
-                    <div class="size-options">
-                        <div class="size-option">Small</div>
-                        <div class="size-option selected">Medium</div>
-                        <div class="size-option">Large</div>
-                        <div class="size-option">X-Large</div>
+            </div>
+
+            <div class="size-selector mt-3">
+                <span class="selector-title fw-bold">TALLA</span>
+                <div class="size-options d-flex gap-2">
+                    <div th:each="talla, iterStat : ${productoElegido.tallas}"
+                        class="size-option"
+                        th:classappend="${iterStat.index == 0} ? ' selected' : ''"
+                        th:text="${talla.valor}">
                     </div>
                 </div>
+            </div>
+
                 
                 <div class="add-to-cart-section">
                     <div class="quantity-selector">
@@ -61,7 +61,17 @@
                         <input type="text" class="quantity-input" value="1">
                         <button class="quantity-btn plus">+</button>
                     </div>
-                    <button class="add-to-cart">Añadir al carrito</button>
+                    <!-- Puedes usar th:href para un enlace, pero para enviar datos (como color y talla seleccionados) al backend, lo correcto es usar un <form>. Así puedes enviar los datos seleccionados mediante POST. Ejemplo: -->
+                   <form th:action="@{/carrito/agregar}" method="POST" class="d-inline" id="cartForm">
+                        <input type="hidden" name="productoId" th:value="${productoElegido.idProducto}" />
+                        <input type="hidden" name="nombre" th:value="${productoElegido.nombreProducto}" />
+                        <input type="hidden" name="precio" th:value="${productoElegido.precioProducto}" />
+                        <input type="hidden" name="imagen" th:value="${productoElegido.imagenProducto}" />
+                        <input type="hidden" name="color" id="inputColor" />
+                        <input type="hidden" name="talla" id="inputTalla" />
+                        <input type="hidden" name="cantidad" id="inputCantidad" value="1" />
+                        <button type="submit" class="add-to-cart">Añadir al carrito</button>
+                    </form>
                 </div>
             </div>
         </div>
