@@ -1,0 +1,77 @@
+ <!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{componentes/navbar :: head(titulo='Agregar Producto')}">
+        <style>
+            .size-btn.selected, .color-btn.selected {
+                border: 2px solid #0d6efd;
+                background-color: #cfe2ff;
+            }
+            .color-btn.selected {
+                border: 2px solid black;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.8); 
+            }
+        </style>
+    </head>
+
+    <body>
+        
+        <div th:replace="~{componentes/navbar :: navbar}"></div>
+
+        <main class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="fs-3 fw-bold mb-3"><i class="bi bi-box-seam"></i> Lista de Productos</h1>
+            <div>
+                <a th:href="@{/productos/principal}" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left-circle"></i> Regresar
+                </a>
+                <a th:href="@{/productos/agregar}" class="btn btn-success">
+                    <i class="bi bi-plus-circle"></i> Agregar Producto
+                </a>
+            </div>
+        </div>
+        <table class="table table-striped table-bordered">
+                <thead class="text-center">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Estrellas</th>
+                        <th>Categoría</th>
+                        <th>Tallas</th>
+                        <th>Colores</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="producto : ${productos}">
+                        <td th:text="${producto.nombreProducto}"></td>
+                        <td th:text="${producto.descripcionProducto}"></td>
+                        <td th:text="${producto.precioProducto}"></td>
+                        <td th:text="${producto.stockProducto}"></td>
+                        <td th:text="${producto.estrellasProducto}"></td>
+                        <td th:text="${producto.categorias != null ? producto.getCategoriasText() : 'N/A'}"></td>
+                        <td
+                            th:text="${producto.tallas != null && !producto.tallas.isEmpty() ? producto.getTallasText().toLowerCase() : 'N/A'}">
+                        </td>
+                        <td
+                            th:text="${producto.colores != null && !producto.colores.isEmpty() ? producto.getColoresText() : 'N/A'}">
+                        </td>
+                        <td>
+                            <div class="d-flex gap-2">
+                                <a th:href="@{/productos/agregar(id=${producto.idProducto})}" class="btn btn-warning">Editar</a>
+
+                                <form th:action="@{/productos/eliminar}" method="post">
+                                    <input type="hidden" name="idProducto" th:value="${producto.idProducto}" />
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+        <footer th:replace="~{componentes/footer :: footer}"></footer>
+    </body>
+        </html>

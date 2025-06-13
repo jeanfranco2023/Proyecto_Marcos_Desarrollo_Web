@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head th:replace="~{componentes/navbar::head(titulo='SHOP.CO')}">
+</head>
+
+<body>
+    <div th:replace="~{componentes/navbar::navbar}"></div>
+<div class="container py-5">
+    <div class="row g-4">
+        <!-- Card 1: Lista de productos -->
+        <div class="col-md-4">
+            <div class="card h-100 text-center">
+            <div class="card-body">
+                <div class="mb-3">
+                <i class="bi bi-list-ul" style="font-size: 4rem; color: #0d6efd;"></i>
+                </div>
+                <h5 class="card-title fs-3 fw-bold">Lista de productos</h5>
+                <p class="card-text fs-4">Consulta todos los productos disponibles en el sistema.</p>
+                <a th:href="@{/productos/listar}" class="btn btn-primary">Ver productos</a>
+            </div>
+            </div>
+        </div>
+        <!-- Card 2: Agregar productos -->
+        <div class="col-md-4">
+            <div class="card h-100 text-center">
+            <div class="card-body">
+                <div class="mb-3">
+                <i class="bi bi-plus-square" style="font-size: 4rem; color: #198754;"></i>
+                </div>
+                <h5 class="card-title fs-3 fw-bold">Agregar productos</h5>
+                <p class="card-text fs-4">Añade nuevos productos a tu inventario fácilmente.</p>
+                <a th:href="@{/productos/agregar}" class="btn btn-success">Agregar producto</a>
+            </div>
+            </div>
+        </div>
+        <!-- Card 3: Agregar categorías -->
+        <div class="col-md-4">
+            <div class="card h-100 text-center">
+            <div class="card-body">
+                <div class="mb-3">
+                <i class="bi bi-tags" style="font-size: 4rem; color: #ffc107;"></i>
+                </div>
+                <h5 class="card-title fs-3 fw-bold">Agregar categorías</h5>
+                <p class="card-text fs-4">Crea nuevas categorías para organizar tus productos.</p>
+                <a th:href="@{/productos/registrar/categoria}" class="btn btn-warning">Agregar categoría</a>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <footer th:replace="~{componentes/footer::footer}"></footer>
+
+</body>
+</html>

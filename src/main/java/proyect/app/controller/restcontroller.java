@@ -11,12 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import jakarta.servlet.http.HttpSession;
 import proyect.app.dto.Login;
@@ -27,6 +27,7 @@ import proyect.app.entity.Usuarios;
 import proyect.app.repository.UsuarioRepository;
 import proyect.app.service.CategoriaService;
 import proyect.app.service.ProductoService;
+import proyect.app.service.UsuarioService;
 
 @RestController
 @RequestMapping("/api")
@@ -41,6 +42,9 @@ public class restcontroller {
 
     @Autowired
     private CategoriaService categoriaService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping("/usuarios")
     public List<Usuarios> getAll() {
@@ -58,19 +62,22 @@ public class restcontroller {
     }
 
     @PostMapping("/usuarios/insertar")
-    public Map<String, Object> insertarUsuario(@RequestBody Usuarios usuario) {
+    public ResponseEntity<?> insertarUsuario(@RequestBody Usuarios usuario) {
         if (usuario.getNombreUsuario() == null || usuario.getCorreoUsuario() == null
                 || usuario.getContrasenaUsuario() == null) {
-            return Map.of("mensaje", "Faltan datos para registrar el usuario");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("mensaje", "Faltan datos para registrar el usuario"));
         }
         if (usuarioRepository.findByCorreoUsuario(usuario.getCorreoUsuario()).isPresent()) {
-            return Map.of("mensaje", "El correo ya está registrado");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("mensaje", "El correo ya está registrado"));
         }
-        if (usuario.getContrasenaUsuario().length() == 9) {
-            return Map.of("mensaje", "La contraseña debe tener 9 caracteres");
+        if (usuario.getContrasenaUsuario().length() < 9) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("mensaje", "La contraseña debe tener 9 caracteres"));
         }
         Usuarios nuevoUsuario = usuarioRepository.save(usuario);
-        return Map.of("mensaje", "Usuario registrado con éxito", "usuario", nuevoUsuario);
+        return ResponseEntity.ok(Map.of("mensaje", "Usuario registrado con éxito", "usuario", nuevoUsuario));
     }
 
     @PostMapping("/usuarios/actualizar")
@@ -180,5 +187,15 @@ public class restcontroller {
     public List<Categoria> listarCategorias() {
         List<Categoria> categorias = categoriaService.listar();
         return categorias;
+    }
+
+    @GetMapping("/usuarios/filtrar/{id}")
+    public ResponseEntity<Usuarios> filtrarUsuariosPorId(@PathVariable Integer id) {
+        Usuarios usuario = this.usuarioService.buscarPorId(id);
+        if (usuario != null) {
+            return ResponseEntity.ok(usuario);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 }

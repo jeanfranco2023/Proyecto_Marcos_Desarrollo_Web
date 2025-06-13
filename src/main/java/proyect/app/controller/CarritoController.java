@@ -83,9 +83,9 @@ public class CarritoController {
     @GetMapping("/ver")
     public String verCarrito(@ModelAttribute("carrito") List<CarritoDTO> carrito, Model model) {
         double subtotal = carrito.stream().mapToDouble(CarritoDTO::getSubtotal).sum();
-        double descuento = subtotal * 0.20;
+        double descuento = Math.round(subtotal * 0.20 * 100.0) / 100.0;
         double envio = 4.99;
-        double total = subtotal - descuento + envio;
+        double total =  Math.round((subtotal - descuento + envio)*100.0)/100.0;
 
         model.addAttribute("carritoItems", carrito);
         model.addAttribute("subtotal", subtotal);
