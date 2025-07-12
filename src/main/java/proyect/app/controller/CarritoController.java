@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -11,17 +12,24 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.security.Principal;
 import java.util.ArrayList;
 
 import proyect.app.dto.CarritoDTO;
+import proyect.app.entity.Carrito;
 import proyect.app.entity.Categoria;
+import proyect.app.entity.Pedido;
 import proyect.app.entity.Productos;
+import proyect.app.entity.Usuarios;
 import proyect.app.service.CategoriaService;
+import proyect.app.service.CheckoutService;
 import proyect.app.service.ProductoService;
+import proyect.app.service.UsuarioService;
 
 @Controller
 @RequestMapping("/carrito")
@@ -33,6 +41,12 @@ public class CarritoController {
 
     @Autowired
     private CategoriaService categoriaService;
+
+    @Autowired
+    private CheckoutService checkoutService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @ModelAttribute("carrito")
     public List<CarritoDTO> crearCarrito() {
@@ -85,14 +99,48 @@ public class CarritoController {
         double subtotal = carrito.stream().mapToDouble(CarritoDTO::getSubtotal).sum();
         double descuento = Math.round(subtotal * 0.20 * 100.0) / 100.0;
         double envio = 4.99;
-        double total =  Math.round((subtotal - descuento + envio)*100.0)/100.0;
+        double total = Math.round((subtotal - descuento + envio) * 100.0) / 100.0;
 
         model.addAttribute("carritoItems", carrito);
         model.addAttribute("subtotal", subtotal);
         model.addAttribute("descuento", descuento);
         model.addAttribute("envio", envio);
         model.addAttribute("total", total);
-        return "carrito"; // Vista: carrito.html
+        return "carrito";
+    }   
+
+    @PostMapping("/checkout")
+    public String finalizarCompra(@SessionAttribute("carrito") List<CarritoDTO> carritoSesion,
+            HttpSession session,
+            RedirectAttributes flash,
+            Principal principal) {
+
+        if (carritoSesion.isEmpty()) {
+            flash.addFlashAttribute("error", "El carrito está vacío.");
+            return "redirect:/carrito/ver";
+        }
+
+        Usuarios usuario = usuarioService.buscarPorcorreoUsuario(principal.getName());
+        Carrito carritoEntidad = usuario.getCarrito();
+
+        double subtotal = carritoSesion.stream().mapToDouble(CarritoDTO::getSubtotal).sum();
+        double descuento = Math.round(subtotal * 0.20 * 100.0) / 100.0;
+        double envio = 4.99;
+        double total = Math.round((subtotal - descuento + envio) * 100.0) / 100.0;
+
+        try {
+            Pedido pedido = checkoutService.procesarPedido(
+                    carritoEntidad, subtotal, descuento, envio, total);
+
+            session.removeAttribute("carrito");
+
+            flash.addFlashAttribute("exito",
+                    "Compra completada. Pedido #" + pedido.getIdPedido());
+            return "redirect:/usuarios/mis-pedidos";
+        } catch (RuntimeException ex) {
+            flash.addFlashAttribute("error", ex.getMessage());
+            return "redirect:/carrito/ver";
+        }
     }
 
     @ModelAttribute("categoriaHombres")
@@ -113,17 +161,5 @@ public class CarritoController {
                         "Unisex".equals(categoria.getSexoCategoria()))
                 .collect(Collectors.toList());
         return categoriasMujeres;
-    }
-
-    @ModelAttribute("usuario")
-    public String getUsuarioIniciado(HttpSession session) {
-        Object usuario = session.getAttribute("usuarioIniciado");
-        return usuario != null ? usuario.toString() : null;
-    }
-
-    @ModelAttribute("esAdmin")
-    public boolean esAdmin(HttpSession session) {
-        Boolean admin = (Boolean) session.getAttribute("administrador");
-        return admin != null && admin;
     }
 }

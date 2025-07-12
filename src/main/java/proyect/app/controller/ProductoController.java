@@ -52,18 +52,16 @@ public class ProductoController {
         return "ropas";
     }
 
-    @GetMapping("/principal")
+    @GetMapping("/register/principal")
     public String Productos() {
         return "principalProductos";
     }
 
-    @GetMapping("/listar")
+    @GetMapping("/register/listar")
     @Transactional(readOnly = true)
     public String listarProductos(Model model) {
-        // Carga los productos con sus relaciones en una sola consulta
         List<Productos> listaProductos = productoService.listarProductosConRelaciones();
 
-        // Prepara los datos para la vista
         model.addAttribute("productos", listaProductos);
         model.addAttribute("categorias", categoriaService.listar());
         model.addAttribute("tallas", tallaService.listar());
@@ -72,7 +70,7 @@ public class ProductoController {
         return "listaProductos";
     }
 
-    @GetMapping("/agregar")
+    @GetMapping("/register/agregar")
     @Transactional(readOnly = true)
     public String agregarProducto(@RequestParam(required = false) Integer id, Model model) {
         List<Productos> listaProductos = productoService.listarProductosConRelaciones();
@@ -191,7 +189,7 @@ public class ProductoController {
             return "redirect:/productos/agregar";
         }
 
-        return "redirect:/productos/listar";
+        return "redirect:/productos/register/listar";
     }
 
     @PostMapping("/eliminar")
@@ -212,7 +210,7 @@ public class ProductoController {
         return "redirect:/productos/listar";
     }
 
-    @GetMapping("/registrar/categoria")
+    @GetMapping("/register/registrar/categoria")
     public String registrarCategoria(Model model) {
         model.addAttribute("categorias", new Categoria());
         model.addAttribute("listaCategorias", categoriaService.listar());

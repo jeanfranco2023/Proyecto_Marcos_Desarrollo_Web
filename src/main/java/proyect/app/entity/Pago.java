@@ -1,7 +1,5 @@
 package proyect.app.entity;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,7 +27,5 @@ public class Pago {
     @ManyToOne
     @JoinColumn(name = "id_metodo_pago")
     private MetodoPago metodoPago;
-    private Double monto;
-    private LocalDate fechaPago;
     private String estado;
 }

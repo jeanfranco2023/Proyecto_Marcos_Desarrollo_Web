@@ -9,7 +9,6 @@
 
     <div class="container my-5">
         <div class="row">
-            <!-- Lista de productos -->
             <div class="col-lg-8">
                 <h3 class="mb-4 fw-bold">TU CARRITO</h3>
                 <div class="card mb-3" th:each="item : ${carritoItems}">
@@ -38,7 +37,6 @@
                             <p>
                                 <strong>Subtotal: </strong><span th:text="'$' + ${item.subtotal}"></span>
                             </p>
-                            <!-- Formulario para eliminar -->
                             <form th:action="@{/carrito/eliminar}" method="POST" style="display: inline;">
                                 <input type="hidden" name="productoId" th:value="${item.producto.idProducto}">
                                 <input type="hidden" name="talla" th:value="${item.talla}">
@@ -50,7 +48,6 @@
                 </div>
             </div>
 
-            <!-- Resumen del pedido -->
             <div class="col-lg-4">
                 <div class="card p-4">
                     <h5 class="fw-bold mb-3">Resumen de Pedido</h5>
@@ -77,7 +74,7 @@
                         <button class="btn btn-outline-secondary" type="button">Aplicar</button>
                     </div>
 
-                    <a th:href="@{/pago}" class="btn btn-dark w-100 mt-3">Ir a la caja →</a>
+                    <a th:href="@{/checkout}" class="btn btn-dark w-100 mt-3">Ir a la caja →</a>
                     <a th:href="@{/productos/ropa?categoria=Todas las categorias}" class="btn btn-outline-secondary w-100 mt-2">Seguir comprando</a>
                 </div>
             </div>

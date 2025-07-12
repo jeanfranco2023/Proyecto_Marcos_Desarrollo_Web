@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head(titulo)">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,33 +10,30 @@
     <link rel="stylesheet" href="/css/principal.css">
     <link rel="stylesheet" href="/css/about.css">
     <link rel="stylesheet" href="/css/productos.css">
-        <style>
+    <style>
         .size-btn.selected, .color-btn.selected {
             border: 2px solid #0d6efd;
             background-color: #cfe2ff;
         }
         .color-btn.selected {
             border: 2px solid black;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.8); 
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
         }
     </style>
     <title th:text="${titulo}"></title>
 </head>
 <body>
-    <div th:fragment="navbar" th:remove="tag">
-         <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+<div th:fragment="navbar" th:remove="tag">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
         <div class="container">
             <a class="navbar-brand fw-bold fs-3" th:href="@{/users/principal}">SHOP.CO</a>
-
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-3">
                     <li class="nav-item dropdown menu-container">
-                        <a class="nav-link dropdown-toggle ms-4" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle ms-4" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Tienda
                         </a>
                         <ul class="first-level-menu" aria-labelledby="navbarDropdown">
@@ -59,56 +56,46 @@
                                     </div>
                                 </div>
                             </li>
-
-                            <li class="first-level-item has-submenu">
-                                <a href="/html/estilos">Estilos</a>
-                                <div class="mega-menu">
-                                    <div class="mega-menu-container">
-                                        <div class="mega-menu-column">
-                                            <h4 class="mega-menu-title">Temporada</h4>
-                                            <div class="mega-menu-item"><a href="/estilos/verano">Verano</a></div>
-                                            <div class="mega-menu-item"><a href="/estilos/invierno">Invierno</a></div>
-                                        </div>
-
-                                        <div class="mega-menu-column">
-                                            <h4 class="mega-menu-title">Ocasión</h4>
-                                            <div class="mega-menu-item"><a href="/estilos/formal">Formal</a></div>
-                                            <div class="mega-menu-item"><a href="/estilos/casual">Casual</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link ms-4" href="#">En oferta</a></li>
-                    <li class="nav-item"><a class="nav-link ms-4" href="#">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link ms-4" th:href="@{/productos/ropa?categoria=Todas las categorias}">En oferta</a></li>
+                    <li class="nav-item"><a class="nav-link ms-4" th:href="@{/productos/ropa?categoria=Todas las categorias}">Contacto</a></li>
                 </ul>
-
                 <form class="d-flex me-5 ms-5" style="max-width: 500px;flex: 1;">
-                    <input class="form-control rounded-pill ps-4" type="search" placeholder="Buscar producto"
-                        aria-label="Buscar">
+                    <input class="form-control rounded-pill ps-4" type="search" placeholder="Buscar producto" aria-label="Buscar">
                 </form>
-
                 <div class="d-flex align-items-center justify-content-center">
-                    <a th:href="@{/carrito/ver}" class="text-dark me-3"><i class="bi bi-cart3" style="font-size: 3.5vh;"></i></a>
-                    <div class="dropdown ms-3">
-                        <span class="text-dark d-flex align-items-center justify-content-center" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle display-6"></i>
-                        </span>
-                        <ul class="dropdown-menu text-center mt-3" aria-labelledby="userMenu" style="top: 100%; left: 50%; transform: translate(-50%, 0);">
-                            <li th:if="${esAdmin}">
-                                <a class="dropdown-item" th:href="@{/productos/principal}">Productos</a>
-                            </li>
-                            <li><a class="dropdown-item" th:href="@{/users/logout}">Cerrar sesión</a></li>
-                        </ul>
-                    </div>
-                    <div class="container d-flex flex-column">
-                        <span class="text-dark ms-2">Hola,</span>
-                        <span th:text="${usuario}" class="ms-2"></span>
-                    </div>
+                    <a th:href="@{/carrito/ver}" class="text-dark me-3">
+                        <i class="bi bi-cart3" style="font-size: 3.5vh;"></i>
+                    </a>
+
+                    <sec:authorize access="isAuthenticated()">
+                        <div class="d-flex align-items-center ms-3">
+                            <!-- Ícono de usuario -->
+                            <div class="dropdown">
+                                <span class="text-dark" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle display-6"></i>
+                                </span>
+                                <ul class="dropdown-menu text-center mt-3">
+                                    <li sec:authorize="hasRole('ADMIN')">
+                                        <a class="dropdown-item" th:href="@{/productos/register/principal}">Productos</a>
+                                    </li>
+                                    <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Texto al lado derecho del ícono -->
+                            <div class="ms-2 d-flex flex-column justify-content-center">
+                                <span class="text-dark small">Hola,</span>
+                                <span class="text-dark fw-semibold" sec:authentication="principal.nombre">Usuario</span>
+                            </div>
+                        </div>
+                    </sec:authorize>
+
                 </div>
             </div>
         </div>
     </nav>
+</div>
 </body>
 </html>

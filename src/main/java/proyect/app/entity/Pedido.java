@@ -3,6 +3,7 @@ package proyect.app.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,7 +34,7 @@ public class Pedido {
     private LocalDate fechaPedido;
     private String estadoPedido;
     private double montoPedido;
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<DetallePedido> detalles;
     @OneToOne(mappedBy = "pedido")
     private Pago pago;

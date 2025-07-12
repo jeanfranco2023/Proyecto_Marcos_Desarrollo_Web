@@ -3,6 +3,7 @@ package proyect.app.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import proyect.app.entity.Usuarios;
 import proyect.app.repository.UsuarioRepository;
@@ -12,6 +13,9 @@ public class UsuarioService implements ServicesInterface<Usuarios> {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+     @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<Usuarios> listar() {
@@ -23,9 +27,10 @@ public class UsuarioService implements ServicesInterface<Usuarios> {
         return usuarioRepository.findById(id).orElse(null);
     }
 
-    @Override
-    public void insertar(Usuarios objeto) {
-        usuarioRepository.save(objeto);
+    public void insertar(Usuarios usuario) {
+        String encodedPassword = passwordEncoder.encode(usuario.getContrasenaUsuario());
+        usuario.setContrasenaUsuario(encodedPassword);
+        usuarioRepository.save(usuario);
     }
 
     @Override

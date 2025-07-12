@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head th:replace="~{componentes/navbar::head(titulo='SHOP.CO')}">
+</head>
+
+<body>
+    <div th:replace="~{componentes/navbar::navbar}"></div>
+
+    <div class="container mt-5">
+        <h2 class="mb-4 fw-bold">Finalizar Compra</h2>
+
+        <form th:action="@{/checkout/procesar}" method="post">
+            <div class="mb-4">
+                <label for="metodoPago" class="form-label fw-semibold">Método de Pago:</label>
+                <select class="form-select" id="metodoPago" name="metodoPago" required>
+                    <option th:each="metodo : ${metodosPago}"
+                            th:value="${metodo.idMetodoPago}"
+                            th:text="${metodo.nombreMetodoPago}"></option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <h5 class="fw-semibold">Resumen del Pedido</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle text-center">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Producto</th>
+                                <th>Talla</th>
+                                <th>Color</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="item : ${carritoItems}">
+                                <td th:text="${item.producto.nombreProducto}"></td>
+                                <td th:text="${item.talla}"></td>
+                                <td th:text="${item.color}"></td>
+                                <td th:text="${item.cantidad}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-end flex-column">
+                    <p class="mb-1"><strong>Subtotal:</strong> <span th:text="${subtotal}"></span> S/</p>
+                    <p class="mb-1"><strong>Envío:</strong> <span th:text="${envio}"></span> S/</p>
+                    <p class="fw-bold"><strong>Total:</strong> <span th:text="${total}"></span> S/</p>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">Confirmar y Pagar</button>
+        </form>
+    </div>
+
+    <footer th:replace="~{componentes/footer::footer}"></footer>
+</body>
+
+</html>

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,6 +47,9 @@ public class restcontroller {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @GetMapping("/usuarios")
     public List<Usuarios> getAll() {
         List<Usuarios> usuarios = usuarioRepository.findAll();
@@ -68,17 +72,24 @@ public class restcontroller {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(Map.of("mensaje", "Faltan datos para registrar el usuario"));
         }
+
         if (usuarioRepository.findByCorreoUsuario(usuario.getCorreoUsuario()).isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(Map.of("mensaje", "El correo ya está registrado"));
         }
+
         if (usuario.getContrasenaUsuario().length() < 9) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(Map.of("mensaje", "La contraseña debe tener 9 caracteres"));
+                    .body(Map.of("mensaje", "La contraseña debe tener al menos 9 caracteres"));
         }
+
+        usuario.setContrasenaUsuario(passwordEncoder.encode(usuario.getContrasenaUsuario()));
+
         Usuarios nuevoUsuario = usuarioRepository.save(usuario);
+
         return ResponseEntity.ok(Map.of("mensaje", "Usuario registrado con éxito", "usuario", nuevoUsuario));
     }
+
 
     @PostMapping("/usuarios/actualizar")
     public Map<String, Object> actualizarUsuario(@RequestBody Usuarios usuario) {

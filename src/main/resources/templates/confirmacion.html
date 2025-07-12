@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head th:replace="~{componentes/navbar::head(titulo='Pedido Confirmado')}"></head>
+<body>
+<div th:replace="~{componentes/navbar::navbar}"></div>
+
+<div class="container mt-5 text-center">
+    <h2 class="fw-bold text-success">¡Gracias por tu compra!</h2>
+    <p class="mt-3">Tu pedido ha sido procesado exitosamente.</p>
+    <div th:if="${pedidoId != null}" class="mt-4">
+        <p class="fs-5">ID de Pedido: <strong th:text="${pedidoId}"></strong></p>
+    </div>
+    <a th:href="@{/users/principal}" class="btn btn-outline-primary mt-3">Volver a la tienda</a>
+</div>
+
+<footer th:replace="~{componentes/footer::footer}"></footer>
+</body>
+</html>
