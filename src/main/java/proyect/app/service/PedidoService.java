@@ -70,4 +70,8 @@ public class PedidoService {
     public void save(Pedido pedido) {
         pedidoRepository.save(pedido);
     }
+
+    public Pedido buscarPorId(Integer id) {
+        return pedidoRepository.findById(id).orElse(null);
+    }
 }

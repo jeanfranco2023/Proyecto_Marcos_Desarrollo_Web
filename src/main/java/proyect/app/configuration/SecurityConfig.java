@@ -6,9 +6,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import proyect.app.security.CustomAuthenticationSuccessHandler;
+import proyect.app.security.JwtAuthenticationFilter;
 import proyect.app.service.UsuarioDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,35 +26,38 @@ public class SecurityConfig {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private CustomAuthenticationSuccessHandler successHandler;
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthenticationFilter jwtFilter) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/users/login",
-                    "/logeo",
-                    "/css/**",
-                    "/users/registro",
-                    "/js/**",
-                    "/img/**",
-                    "/api/usuarios/insertar"
-                ).permitAll()
-                .requestMatchers("/productos/register/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
-            )
-            .formLogin(form -> form
-                .loginPage("/users/login")
-                .loginProcessingUrl("/logeo")
-                .defaultSuccessUrl("/users/principal", true)
-                .failureUrl("/users/login?error=true")
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/users/login?logout=true")
-                .permitAll()
-            );
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/users/login",
+                                "/logeo",
+                                "/css/**",
+                                "/users/registro",
+                                "/js/**",
+                                "/img/**",
+                                "/api/usuarios/insertar")
+                        .permitAll()
+                        .requestMatchers("/productos/register/**").hasRole("ADMIN")
+                        .anyRequest().authenticated())
+                .formLogin(form -> form
+                        .loginPage("/users/login")
+                        .loginProcessingUrl("/logeo")
+                        .defaultSuccessUrl("/users/principal", true)
+                        .successHandler(successHandler)
+                        .failureUrl("/users/login?error=true")
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/users/login?logout=true")
+                        .permitAll())
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        ;
 
         return http.build();
     }

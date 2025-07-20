@@ -10,8 +10,10 @@
     <div th:if="${pedidoId != null}" class="mt-4">
         <p class="fs-5">ID de Pedido: <strong th:text="${pedidoId}"></strong></p>
     </div>
-    <a th:href="@{/users/principal}" class="btn btn-outline-primary mt-3">Volver a la tienda</a>
-</div>
+    <a th:href="@{'/checkout/reporte/' + ${pedidoId}}" target="_blank" class="btn btn-success">Generar Reporte</a>
+    <div class="mt-4">
+        <a th:href="@{/users/principal}" class="btn btn-primary">Volver al Inicio</a>
+    </div>
 
 <footer th:replace="~{componentes/footer::footer}"></footer>
 </body>
