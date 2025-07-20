@@ -5,3 +5,20 @@ A continuación les explicare la amnera en la cual se ejecuta el sistema:
    de Spring Tools que te permite compilar el proyecto solo dandole al boton de run.
    3-La opcion de ejecutar por el target tambien es posible pero tiene ciertos detalles y no te deja acceder a ciertas rutas o funcionalidades como
    generar el reporte pdf.
+Las dependencias empleadas en este proyecto fueron las siguientes:
+   -Spring Data JPA
+   -Thymeleaf
+   -Spring Web
+   -Spring Boot DevTools
+   -MySQL Connector/J
+   -Lombok
+   -Spring Boot Starter Test
+   -Spring Security
+   -Thymeleaf Spring Security Extras
+   -JJWT API
+   -JJWT Impl
+   -JJWT Jackson
+   -JasperReports
+   -JasperReports PDF
+   -JasperReports Fonts
+   -OpenPDF
